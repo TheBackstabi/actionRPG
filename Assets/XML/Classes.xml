@@ -1,0 +1,24 @@
+<classes>
+    <class id ='0'>
+        <name>Gamemaster</name>
+        <description>Drops banhammers and tests stuff.</description>
+    <class id='1'>
+        <name>Blademaster</name>
+        <description>Blademasters are exceptional warriors, making use of their battle prowess to overpower
+        enemies and swiftly move across the battlefield. They are also able to empower their allies and
+        demoralize their enemies with powerful battleshouts and war cries.</description>
+    </class>
+    <class id='2'>
+        <name>Shadowblade</name>
+        <description>Shadowblades are expert assassins, capable of making use of various venoms and vicious
+        bladed weapon strikes that leave their targets crippled and broken... if alive at all. They manipulate
+        the shadows to hide their assaults and enhance their movement, weaving between enemy attacks as if they
+        were in slow motion.</description>
+    </class>
+    <class id='3'>
+        <name>Warlock</name>
+        <description>Warlocks are adept summoners and magicians, able to manipulate the latent energy within
+        themselves and the world around them. While some Warlocks prefer the powerful control and destructive
+        force of Soul-powered spells, some prefer the darker and more corrosive Blood spells, slowly rotting
+        away their foes with diseases and directly draining their vitality.</description>
+</classes>

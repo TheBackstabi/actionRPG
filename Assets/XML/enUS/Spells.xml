@@ -1,0 +1,18 @@
+<spells>
+	<spell id='0'>
+		<name>Attack</name>
+		<desc>A basic attack.</desc>
+	</spell>
+	<spell id='1'>
+		<name>Incineration</name>
+		<desc>Surrounds the target in flames, dealing damage over time.</desc>
+	</spell>
+	<spell id='2'>
+		<name>Slam</name>
+		<desc>Hit the ground with such force that you create a shockwave, damaging all enemies in 15 yards.</desc>
+	</spell>
+	<spell id='3'>
+		<name>Wild Fire</name>
+		<desc>Combust the area around the targeted location, dealing damage to all targets in 10 yards over 15 seconds.</desc>
+	</spell>
+</spells>

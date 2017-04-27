@@ -1,0 +1,62 @@
+<binds>
+    <bind>
+        <name>Spell 1</name>
+        <input>Alpha1</input>
+        <altInput>Q</altInput>
+    </bind>
+    <bind>
+        <name>Spell 2</name>
+        <input>Alpha2</input>
+        <altInput>W</altInput>
+    </bind>
+    <bind>
+        <name>Spell 3</name>
+        <input>Alpha3</input>
+        <altInput>E</altInput>
+    </bind>
+    <bind>
+        <name>Spell 4</name>
+        <input>Alpha4</input>
+        <altInput>R</altInput>
+    </bind>
+    <bind>
+        <name>Spell 5</name>
+        <input>Alpha5</input>
+        <altInput>T</altInput>
+    </bind>
+    <bind>
+        <name>Force Stop</name>
+        <input>LeftShift</input>
+        <altInput>None</altInput>
+    </bind>
+	<bind>
+		<name>Pause</name>
+		<input>Escape</input>
+		<altInput>F12</altInput>
+	</bind>
+	<bind>
+		<name>Character</name>
+		<input>C</input>
+		<altInput>None</altInput>
+	</bind>
+	<bind>
+		<name>Inventory</name>
+		<input>I</input>
+		<altInput>None</altInput>
+	</bind>
+	<bind>
+		<name>Skills</name>
+		<input>N</input>
+		<altInput>None</altInput>
+	</bind>
+	<bind>
+		<name>Map</name>
+		<input>M</input>
+		<altInput>None</altInput>
+	</bind>
+	<bind>
+		<name>Close Menus</name>
+		<input>Space</input>
+		<altInput>None</altInput>
+	</bind>
+</binds>
