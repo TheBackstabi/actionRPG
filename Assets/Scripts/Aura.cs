@@ -17,16 +17,14 @@ public class Aura {
     public float duration;
     public bool consumedOnUse, isDebuff;
     public List<Modifier> mods;
-    public byte[] textureData;
-    public string auraName, desc;
+    public string auraName, desc, texture;
 
     public Aura()
     {
-        auraName = desc = "";
+        auraName = desc = texture = "";
         duration = -1;
         id = 0;
         consumedOnUse = isDebuff = false;
-        textureData = null;
         mods = new List<Modifier>();
     }
 

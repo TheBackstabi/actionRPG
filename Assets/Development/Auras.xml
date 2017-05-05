@@ -4,18 +4,21 @@
 		<oneUse>true</oneUse>
 		<isDebuff>false</isDebuff>
 		<mods>0:Damage:1000</mods>
+        <texture>GENERAL_ATTACK</texture>
 	</aura>
 	<aura id='1'>
 		<duration>20</duration>
 		<oneUse>false</oneUse>
 		<isDebuff>false</isDebuff>
 		<mods>-1:Cost:-50/-1:Damage:100</mods>
+        <texture>GENERAL_ATTACK</texture>
 	</aura>
 	<aura id='2'>
 		<duration>-1</duration>
 		<oneUse>false</oneUse>
 		<isDebuff>false</isDebuff>
 		<mods>3:Cooldown:-100</mods>
+        <texture>GENERAL_WILDFIRE</texture>
 	</aura>
 </auras>
 <!--

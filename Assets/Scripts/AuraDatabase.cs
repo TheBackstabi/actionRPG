@@ -65,6 +65,8 @@ public class AuraDatabase : MonoBehaviour {
                     newMod.value = float.Parse(innerMod[2]);
                     newAura.mods.Add(newMod);
                 }
+                fileReader.ReadToNextSibling("texture");
+                newAura.texture = fileReader.ReadString();
                 loadedAuras.Add(newAura.id, newAura);
             }
             fileReader.Close();
