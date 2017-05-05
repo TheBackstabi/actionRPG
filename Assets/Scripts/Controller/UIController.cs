@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour {
 
     private bool hasBeenInit = false;
     private static UIController instance = null;
-    public static UIController UIInstance
+    public static UIController Instance
     {
         get { return instance; }
     }
@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour {
 
     public static UIController GetInstance()
     {
-        return UIInstance;
+        return Instance;
     }
 
 	// Use this for initialization
@@ -179,15 +179,18 @@ public class UIController : MonoBehaviour {
                     createdCanvas.GetComponent<CharScreenStats>().Begin(player);
             }
 
-            fpsArray.Enqueue((int)(1 / Time.deltaTime));
-            if (fpsArray.Count == 100)
+            if (Time.deltaTime > 0)
             {
-                int avgFPS = 0;
-                foreach (int fps in fpsArray)
-                    avgFPS += fps;
-                avgFPS /= 100;
-                FPS.text = "FPS: " + avgFPS.ToString();
-                fpsArray.Clear();
+                fpsArray.Enqueue((int)(1 / Time.deltaTime));
+                if (fpsArray.Count == 100)
+                {
+                    int avgFPS = 0;
+                    foreach (int fps in fpsArray)
+                        avgFPS += fps;
+                    avgFPS /= 100;
+                    FPS.text = "FPS: " + avgFPS.ToString();
+                    fpsArray.Clear();
+                }
             }
         }
     }

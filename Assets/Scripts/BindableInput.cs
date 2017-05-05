@@ -8,6 +8,7 @@ using System.Xml;
 
 public class BindableInput : MonoBehaviour {
     private static string bindingSaveLoc = "/Bindings.dat";
+    private static string defaultBindingSaveLoc = "/XML/DefaultBinds.xml";
     private static BindableInput instance;
     public static BindableInput Instance
     {
@@ -40,7 +41,7 @@ public class BindableInput : MonoBehaviour {
     public static void LoadDefaultBinds()
     {
         binds = new Dictionary<string, Binding>();
-        XmlReader reader = XmlReader.Create(Application.dataPath + "/XML/DefaultBinds.xml");
+        XmlReader reader = XmlReader.Create(Application.dataPath + defaultBindingSaveLoc);
         reader.MoveToContent();
         while (reader.ReadToFollowing("bind"))
         {
@@ -52,6 +53,7 @@ public class BindableInput : MonoBehaviour {
             reader.ReadToNextSibling("altInput");
             newBinding.altInput = (KeyCode)System.Enum.Parse(typeof(KeyCode), reader.ReadString());
             binds.Add(newBinding.name, newBinding);
+            Debug.Log("Name: " + newBinding.name + ", Input: " + newBinding.input);
         }
         SaveBinds();
     }
@@ -133,9 +135,7 @@ public class BindableInput : MonoBehaviour {
         {
             Binding updatedBind = binds[_name];
             if (_input == KeyCode.None)
-            {
                 updatedBind.input = GetAltBind(_name);
-            }
             else
                 updatedBind.input = _input;
             binds.Remove(_name);
@@ -143,6 +143,7 @@ public class BindableInput : MonoBehaviour {
             if (_input == KeyCode.None)
                 UpdateAltBind(_name, KeyCode.None);
         }
+        UIController.Instance.UpdateBindText();
     }
 
     public static void UpdateAltBind(string _name, KeyCode _input)
@@ -156,6 +157,7 @@ public class BindableInput : MonoBehaviour {
             binds.Remove(_name);
             binds.Add(_name, updatedBind);
         }
+        UIController.Instance.UpdateBindText();
     }
 
     public static KeyCode GetBind(string _name)
@@ -218,7 +220,9 @@ public class BindableInput : MonoBehaviour {
                     return true;
                 }
             }
+            return false;
         }
+        Debug.Log("BindableInput::BindDown >> No bind found for "+_name);
         return false;
     }
     public static bool BindUp(string _name)
@@ -230,7 +234,9 @@ public class BindableInput : MonoBehaviour {
             {
                 return true;
             }
+            return false;
         }
+        Debug.Log("BindableInput::BindUp >> No bind found for "+_name);
         return false;
     }
 

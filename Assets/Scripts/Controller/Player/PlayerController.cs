@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour {
                     Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
                     if (!eventSystem.IsPointerOverGameObject())
                     {
-                        if (Physics.Raycast(ray, out hit, int.MaxValue, enemyMask))
+                        if (!BindableInput.BindDown("Force Move", true) && Physics.Raycast(ray, out hit, int.MaxValue, enemyMask))
                         {
                             inCombatMove = true;
                             targettedEnemy = hit.collider.gameObject;
@@ -181,30 +181,20 @@ public class PlayerController : MonoBehaviour {
                     {
                         if (Physics.Raycast(ray, out hit, int.MaxValue, environmentMask))
                         {
-                            if (canMove)
+                            if (canMove && !BindableInput.BindDown("Force Stop", true))
                             {
                                 Vector3 nextMove = hit.point;
                                 nextMove.y += halfHeight;
                                 MovePlayer(nextMove);
                             }
+                            else
+                                StopMoving();
                             Vector3 look = hit.point;
                             look.y = transform.position.y;
                             transform.rotation = Quaternion.LookRotation(look - transform.position);
                         }
                     }
                 }
-            }
-
-            if (BindableInput.BindDown("Force Stop", true))
-            {
-                StopMoving();
-                forceStop = true;
-                canMove = false;
-            }
-            else if (!BindableInput.BindDown("Force Stop"))
-            {
-                forceStop = false;
-                canMove = true;
             }
         }
 	}

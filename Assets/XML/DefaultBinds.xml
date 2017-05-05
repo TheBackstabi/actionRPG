@@ -29,6 +29,11 @@
         <input>LeftShift</input>
         <altInput>None</altInput>
     </bind>
+    <bind>
+        <name>Force Move</name>
+        <input>LeftControl</input>
+        <altInput>None</altInput>
+    </bind>
 	<bind>
 		<name>Pause</name>
 		<input>Escape</input>

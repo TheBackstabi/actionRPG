@@ -15,6 +15,11 @@ public class CharScreenStats : MonoBehaviour {
         GetComponent<Canvas>().enabled = false;
 	}
 
+    private void OnDestroy()
+    {
+        DeleteTooltip();
+    }
+
     void ShowStats()
     {
         if (isReady)
