@@ -33,7 +33,7 @@ public class AuraDatabase : MonoBehaviour {
         string fileName = Application.dataPath + "/Data/Auras.dat";
         if (File.Exists(fileName))
         {
-            Debug.Log("Loading auras for .dat file");
+            Debug.Log("Loading auras from .dat file");
             BinaryFormatter format = new BinaryFormatter();
             FileStream load = File.Open(fileName, FileMode.Open);
             loadedAuras = (Dictionary<int, Aura>)format.Deserialize(load);
@@ -71,7 +71,6 @@ public class AuraDatabase : MonoBehaviour {
 
             fileName = Application.dataPath + "/XML/" + GameVariables.locale + "/Auras.xml";
             fileReader = XmlReader.Create(fileName);
-            fileReader.MoveToContent();
             while (fileReader.ReadToFollowing("aura"))
             {
                 int id = int.Parse(fileReader.GetAttribute("id"));

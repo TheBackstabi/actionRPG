@@ -6,6 +6,7 @@ public enum AuraMods { Damage, Cost, Cooldown, Proc, NUM_MODS };
 
 [System.Serializable]
 public class Aura {
+    [System.Serializable]
     public struct Modifier
     {
         public int spellID;
@@ -31,6 +32,12 @@ public class Aura {
 
     public void DebugPrint()
     {
+        int numMods = 1;
+        string modifierString = "";
+        foreach(Modifier mod in mods)
+        {
+            modifierString += "\nMod " + numMods + " -- spellID: " + mod.spellID + ", modType: " + mod.mod.ToString() + ", Value: " + mod.value;
+        }
         Debug.Log(
             "ID: " + id.ToString() +
             ", name: \"" + auraName + "\"" +
@@ -38,6 +45,7 @@ public class Aura {
             ", oneUse: \"" + consumedOnUse.ToString() + "\"" +
             ", isDebuff: \"" + isDebuff.ToString() + "\"" +
             ", duration: \"" + duration.ToString() + "\"" +
-            ", mods: \"" + mods.ToString() + "\"");
+            modifierString);
+
     }
 }

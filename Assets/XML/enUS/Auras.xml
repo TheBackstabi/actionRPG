@@ -1,0 +1,14 @@
+<auras>
+    <aura id='0'>
+        <name>Power Punch</name>
+        <desc>Your next basic attack is increased by 1000%.</desc>
+    </aura>
+    <aura id='1'>
+        <name>Very Angry</name>
+        <desc>Mana costs are reduced by 50%, and all damage increased by 100%.</desc>
+    </aura>
+    <aura id='2'>
+        <name>Propane Tank</name>
+        <desc>Wild Fire cooldown is reduced by 100%.</desc>
+    </aura>
+</auras>

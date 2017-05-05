@@ -2,7 +2,7 @@
 	<aura id='0'>
 		<duration>10</duration>
 		<oneUse>true</oneUse>
-		<isDebuff>false<isDebuff>
+		<isDebuff>false</isDebuff>
 		<mods>0:Damage:1000</mods>
 	</aura>
 	<aura id='1'>
@@ -19,7 +19,7 @@
 	</aura>
 </auras>
 <!--
-Mods -- SpellID:Type:Value
+Mods :: SpellID:Type:Value
 SpellID: The spell to be affected by this Aura. -1 for all.
 Type: Damage, Cost, Cooldown, Proc
 Value: % change to SpellID's Type.
