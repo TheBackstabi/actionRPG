@@ -32,7 +32,7 @@ public class ActionButtonScript : MonoBehaviour {
         if (!isReady)
             Start();
         setSpell = selectedSpell;
-        spellTexture.LoadImage(selectedSpell.textureData);
+        spellTexture.LoadImage(TextureLoader.Instance[selectedSpell.texture]);
         spellIcon.texture = spellTexture;
     }
 

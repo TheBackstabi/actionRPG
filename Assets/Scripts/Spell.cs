@@ -4,16 +4,14 @@ using UnityEngine;
 
 [System.Serializable]
 public class Spell {
-    public string name, desc, objectPath, type;
+    public string name, desc, objectPath, type, texture;
     public int id, manaCost, spellType, damageValue, range, school, cooldown, duration, radius, ticks;
     public bool ignoreGCD;
-    public byte[] textureData;
     
     public Spell()
     {
-        name = desc = objectPath = "";
+        name = desc = objectPath = texture = "";
         id = manaCost = spellType = damageValue = range = school = cooldown = duration = radius = ticks = 0;
-        textureData = null;
     }
 
     public void DebugPrint()

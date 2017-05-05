@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\Stats\Enemy\HealthbarScript.cs" />
     <Compile Include="Assets\Scripts\Stats\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Stats\RPG_Resource.cs" />
+    <Compile Include="Assets\Scripts\TextureLoader.cs" />
     <Compile Include="Assets\Scripts\UI\ActionButtonScript.cs" />
     <Compile Include="Assets\Scripts\UI\CharScreenStats.cs" />
     <Compile Include="Assets\Scripts\UI\KeyAlreadyBound_Script.cs" />

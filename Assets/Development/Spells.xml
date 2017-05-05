@@ -3,7 +3,7 @@
         <manaCost>0</manaCost>
         <potency>1</potency>
         <range>6</range>
-        <texture>/SpellTextures/Attack.png</texture>
+        <texture>GENERAL_ATTACK</texture>
         <cooldown>0</cooldown>
 		<ignoreGCD>false</ignoreGCD>
         <school>0</school>
@@ -13,7 +13,7 @@
         <manaCost>5</manaCost>
         <potency>5</potency>
         <range>60</range>
-        <texture>/SpellTextures/StrongAttack.png</texture>
+        <texture>GENERAL_STRONGATTACK</texture>
         <cooldown>0</cooldown>
 		<ignoreGCD>false</ignoreGCD>
         <school>1</school>
@@ -28,7 +28,7 @@
         <manaCost>5</manaCost>
         <potency>10</potency>
         <range>6</range>
-        <texture>/SpellTextures/SwagFoG.png</texture>
+        <texture>GENERAL_SLAM</texture>
         <cooldown>6</cooldown>
 		<ignoreGCD>true</ignoreGCD>
         <school>0</school>
@@ -42,7 +42,7 @@
         <manaCost>30</manaCost>
         <potency>2</potency>
         <range>60</range>
-        <texture>/SpellTextures/YellowShard.png</texture>
+        <texture>GENERAL_WILDFIRE</texture>
         <cooldown>6</cooldown>
 		<ignoreGCD>true</ignoreGCD>
         <school>1</school>

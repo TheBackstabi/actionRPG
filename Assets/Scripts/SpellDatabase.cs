@@ -59,12 +59,7 @@ public class SpellDatabase : MonoBehaviour {
                     fileReader.ReadToNextSibling("range");
                     newSpell.range = int.Parse(fileReader.ReadString());
                     fileReader.ReadToNextSibling("texture");
-                    string texPath = Application.dataPath + fileReader.ReadString();
-                    if (File.Exists(texPath))
-                    {
-                        newSpell.textureData = File.ReadAllBytes(texPath);
-                        Debug.Log(texPath);
-                    }
+                    newSpell.texture = fileReader.ReadString();
                     fileReader.ReadToNextSibling("cooldown");
                     newSpell.cooldown = int.Parse(fileReader.ReadString());
                     fileReader.ReadToNextSibling("ignoreGCD");
