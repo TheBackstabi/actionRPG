@@ -5,13 +5,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class TextureLoader : MonoBehaviour {
-    [System.Serializable]
-    public struct Texture
-    {
-        public string name;
-        public byte[] data;
-    }
-
     private Dictionary<string, Texture> Textures;
     public byte[] this[string key]
     {
