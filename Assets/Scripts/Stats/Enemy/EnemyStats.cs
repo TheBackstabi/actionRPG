@@ -57,6 +57,7 @@ public class EnemyStats : MonoBehaviour {
             int adjustedMaxHealth = maxHealth + (int)((maxHealth * .1f) * level);
             currentHealth = adjustedMaxHealth;
         }
+        maxHealth = currentHealth;
         halfHeight = gameObject.GetComponent<MeshRenderer>().bounds.extents.y;
         healthTexture = new Texture2D(1, 1);
         healthTexture.SetPixel(0,0,Color.red);

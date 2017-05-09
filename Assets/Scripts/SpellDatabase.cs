@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Xml;
-using UnityEngine.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class SpellDatabase : MonoBehaviour {
@@ -28,10 +27,34 @@ public class SpellDatabase : MonoBehaviour {
         save.Close();
     }
 
+    public void LoadLocalizedText(string locale)
+    {
+        if (loadedSpells != null)
+        {
+            string filePath = Application.dataPath + "\\XML\\" + locale + "\\Spells.xml";
+            if (File.Exists(filePath))
+            {
+                XmlReader fileReader = XmlReader.Create(filePath);
+                fileReader.MoveToContent();
+                while (fileReader.ReadToFollowing("spell"))
+                {
+                    int id = int.Parse(fileReader.GetAttribute("id"));
+                    if (loadedSpells[id] != null)
+                    {
+                        fileReader.ReadToDescendant("name");
+                        loadedSpells[id].name = fileReader.ReadString();
+                        fileReader.ReadToNextSibling("desc");
+                        loadedSpells[id].desc = fileReader.ReadString();
+                    }
+                }
+                fileReader.Close();
+            }
+        }
+    }
+
     // Use this for initialization
     void LoadSpellData()
     {
-        DontDestroyOnLoad(this.gameObject);
         loadedSpells = new Dictionary<int,Spell>();
         string fileName = Application.dataPath + "/Data/Spells.dat";
         if (File.Exists(fileName))
@@ -41,6 +64,7 @@ public class SpellDatabase : MonoBehaviour {
             FileStream load = File.Open(fileName, FileMode.Open);
             loadedSpells = (Dictionary<int, Spell>)format.Deserialize(load);
             load.Close();
+            LoadLocalizedText("enUS");
         }
         else
         {
@@ -98,21 +122,7 @@ public class SpellDatabase : MonoBehaviour {
                 }
             }
             fileReader.Close();
-
-            fileName = Application.dataPath + "/XML/"+GameVariables.locale+"/Spells.xml";
-            fileReader = XmlReader.Create(fileName);
-            while (fileReader.Read())
-            {
-                if (fileReader.IsStartElement() && fileReader.Name == "spell")
-                {
-                    int id = int.Parse(fileReader.GetAttribute("id"));
-                    fileReader.ReadToDescendant("name");
-                    loadedSpells[id].name = fileReader.ReadString();
-                    fileReader.ReadToNextSibling("desc");
-                    loadedSpells[id].desc = fileReader.ReadString();
-                }
-            }
-            fileReader.Close();
+            LoadLocalizedText("enUS"); // TODO: Store locale to be loaded via UserPref settings
             SaveSpellData();
         }
         //foreach (KeyValuePair<int, Spell> entry in loadedSpells)

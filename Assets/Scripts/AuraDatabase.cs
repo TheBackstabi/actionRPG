@@ -27,6 +27,31 @@ public class AuraDatabase : MonoBehaviour {
         save.Close();
     }
 
+    public void LoadLocalizedText(string locale)
+    {
+        if (loadedAuras != null)
+        {
+            string fileName = Application.dataPath + "\\XML\\" + locale + "\\Auras.xml";
+            if (File.Exists(fileName))
+            {
+                XmlReader fileReader = XmlReader.Create(fileName);
+                fileReader.MoveToContent();
+                while (fileReader.ReadToFollowing("aura"))
+                {
+                    int id = int.Parse(fileReader.GetAttribute("id"));
+                    if (loadedAuras[id] != null)
+                    {
+                        fileReader.ReadToDescendant("name");
+                        loadedAuras[id].auraName = fileReader.ReadString();
+                        fileReader.ReadToNextSibling("desc");
+                        loadedAuras[id].desc = fileReader.ReadString();
+                    }
+                }
+                fileReader.Close();
+            }
+        }
+    }
+
     void LoadAuraData()
     {
         loadedAuras = new Dictionary<int, Aura>();
@@ -38,6 +63,7 @@ public class AuraDatabase : MonoBehaviour {
             FileStream load = File.Open(fileName, FileMode.Open);
             loadedAuras = (Dictionary<int, Aura>)format.Deserialize(load);
             load.Close();
+            LoadLocalizedText("enUS");
         }
         else
         {
@@ -70,18 +96,7 @@ public class AuraDatabase : MonoBehaviour {
                 loadedAuras.Add(newAura.id, newAura);
             }
             fileReader.Close();
-
-            fileName = Application.dataPath + "/XML/" + GameVariables.locale + "/Auras.xml";
-            fileReader = XmlReader.Create(fileName);
-            while (fileReader.ReadToFollowing("aura"))
-            {
-                int id = int.Parse(fileReader.GetAttribute("id"));
-                fileReader.ReadToDescendant("name");
-                loadedAuras[id].auraName = fileReader.ReadString();
-                fileReader.ReadToNextSibling("desc");
-                loadedAuras[id].desc = fileReader.ReadString();
-            }
-            fileReader.Close();
+            LoadLocalizedText("enUS"); // TODO: Store locale to be loaded via UserPref settings
             SaveAuraData();
         }
     }
