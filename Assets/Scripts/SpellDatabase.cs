@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class SpellDatabase : MonoBehaviour {
     static Dictionary<int, Spell> loadedSpells;
     private static SpellDatabase instance = null;
-    public static SpellDatabase SpellDatabaseInstance
+    public static SpellDatabase Instance
     {
         get { return instance; }
     }
@@ -134,5 +134,10 @@ public class SpellDatabase : MonoBehaviour {
         if (loadedSpells.ContainsKey(id))
             return loadedSpells[id];
         return null;
+    }
+
+    public static int GetNumSpells()
+    {
+        return loadedSpells.Count;
     }
 }

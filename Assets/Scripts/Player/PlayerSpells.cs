@@ -15,14 +15,15 @@ public class PlayerSpells : MonoBehaviour {
         availableSpells = new List<int>();
         selectedSpells = new int[(int)SpellSlots.NUM_SLOTS];
         spellCooldowns = new float[(int)SpellSlots.NUM_SLOTS];
-        availableSpells.Add(1);
-        availableSpells.Add(2);
-        availableSpells.Add(3);
-        availableSpells.Add(4);
-        selectedSpells[(int)SpellSlots.Slot1] = 2;
+        for (int i = 0; i < SpellDatabase.GetNumSpells(); i++)
+            availableSpells.Add(i);
         selectedSpells[(int)SpellSlots.RMB] = 1;
+        selectedSpells[(int)SpellSlots.Slot1] = 2;
         selectedSpells[(int)SpellSlots.Slot2] = 3;
-	}
+        selectedSpells[(int)SpellSlots.Slot3] = 4;
+        selectedSpells[(int)SpellSlots.Slot4] = 5;
+        selectedSpells[(int)SpellSlots.Slot5] = 6;
+    }
 	
 	// Update is called once per frame
 	void Update () {

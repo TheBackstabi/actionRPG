@@ -47,10 +47,10 @@ public class ActionButtonScript : MonoBehaviour {
         Vector2 pos = trans.position;
         pos.y += trans.rect.height/2;
         string potency = setSpell.damageValue.ToString() + "00% ";
-        switch (setSpell.damageValue)
+        switch (setSpell.school)
         {
-            case 1: potency += "Physical Damage"; break;
-            default: potency += "Magical Damage"; break;
+            case 0: potency += "Physical Damage"; break;
+            case 1: potency += "Magical Damage"; break;
         }
         tooltip = FindObjectOfType<GameVariables>().CreateTooltip(setSpell.name, setSpell.manaCost.ToString() + " Mana - " + potency, setSpell.desc, pos);
     }
