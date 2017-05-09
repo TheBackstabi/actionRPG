@@ -7,7 +7,7 @@
         <cooldown>0</cooldown>
 		<ignoreGCD>false</ignoreGCD>
         <school>0</school>
-        <gameObject>SpellGameobjects/Attack</gameObject>
+        <gameObject>SpellGameobjects\Attack</gameObject>
     </spell>
     <spell id='1'>
         <manaCost>5</manaCost>
@@ -17,7 +17,7 @@
         <cooldown>0</cooldown>
 		<ignoreGCD>false</ignoreGCD>
         <school>1</school>
-        <gameObject>SpellGameobjects/DoT_Standard</gameObject>
+        <gameObject>SpellGameobjects\DoT_Standard</gameObject>
 		<extraFlags>
 			<type>DoT</type>
 			<duration>6</duration>
@@ -32,7 +32,7 @@
         <cooldown>6</cooldown>
 		<ignoreGCD>true</ignoreGCD>
         <school>0</school>
-        <gameObject>SpellGameobjects/Ground_Instant</gameObject>
+        <gameObject>SpellGameobjects\Ground_Instant</gameObject>
 		<extraFlags>
 			<type>AoE</type>
 			<radius>15</radius>
@@ -46,7 +46,7 @@
         <cooldown>6</cooldown>
 		<ignoreGCD>true</ignoreGCD>
         <school>1</school>
-        <gameObject>SpellGameobjects/Ground_DoT</gameObject>
+        <gameObject>SpellGameobjects\Ground_DoT</gameObject>
 		<extraFlags>
 			<type>AoEDoT</type>
 			<duration>6</duration>
@@ -58,5 +58,4 @@
 <!--Extra flag types and their values:
 	DoT: duration, ticks
 	AoE: radius
-	AoEDoT: duration, ticks, radius
-	Buff: duration, isDebuff-->
+	AoEDoT: duration, ticks, radius-->
