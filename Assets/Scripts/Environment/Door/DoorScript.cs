@@ -30,7 +30,7 @@ public class DoorScript : MonoBehaviour {
             {
                 isLoading = true;
                 loadingCanvas = Instantiate(canvasToShow);
-                other.gameObject.GetComponent<PlayerController>().StopMoving();
+                other.gameObject.GetComponent<PlayerController>().isMoving = false;
                 StartCoroutine(LoadScene());
             }
         }

@@ -21,13 +21,13 @@ public class PlayerController : MonoBehaviour {
     public float timeClickedOnEnemy = 0f;
     public GameObject targettedEnemy;
     private EventSystem eventSystem;
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     private float maxMovementSpeed, minMovementSpeed;
     private int environmentMask = 1 << 0;
     private int enemyMask = 1 << 11;
 
-    Vector3 moveToPosition;
+    public Vector3 moveToPosition;
 
     #region ACCESSORS
 
@@ -75,43 +75,6 @@ public class PlayerController : MonoBehaviour {
 
     #endregion
 
-    void FixedUpdate()
-    {
-        if (canMove && isMoving)
-        {
-            if ((moveToPosition - transform.position).magnitude > 1f)
-            {
-                Vector3 moveDirection = (moveToPosition - currentPosition).normalized;
-                moveDirection.y = 0;
-                controller.Move(moveDirection * movementSpeed * .15f);
-                Vector3 nextPos = currentPosition;
-                nextPos.x = transform.position.x;
-                nextPos.z = transform.position.z;
-                RaycastHit hit;
-                if (Physics.Raycast(nextPos, new Vector3(0, -1, 0), out hit, halfHeight + Mathf.Deg2Rad * controller.slopeLimit, environmentMask))
-                {
-                    nextPos.y = hit.point.y + halfHeight;
-                    transform.position = currentPosition = nextPos;
-                }
-                else
-                {
-                    transform.position = currentPosition;
-                }
-            }
-        }
-    }
-
-    public void MovePlayer(Vector3 nextMove)
-    {
-        moveToPosition = nextMove;
-        isMoving = true;
-    }
-    
-    public void StopMoving()
-    {
-        isMoving = false;
-    }
-
 	// Use this for initialization
 	void Start ()
     {
@@ -135,67 +98,81 @@ public class PlayerController : MonoBehaviour {
         eventSystem = FindObjectOfType<EventSystem>();
         moveToPosition = transform.position;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    public void MovePlayer(Vector3 movePos)
     {
-        if (!GameVariables.isPaused)
+        isMoving = true;
+        moveToPosition = movePos;
+    }
+
+    void FixedUpdate()
+    {
+        if (isMoving && canMove && !forceStop)
         {
-            movementSpeed = Mathf.Clamp(baseMovementSpeed * stats.IncreasedMovementSpeed, minMovementSpeed, maxMovementSpeed);
-            if (playerCamera)
+            if ((moveToPosition - transform.position).magnitude > 1f)
             {
-                if (Input.GetButtonDown("Mouse PlayerMove"))
+                Vector3 moveDirection = (moveToPosition - transform.position).normalized;
+                moveDirection.y = 0;
+                controller.Move(moveDirection * movementSpeed * .15f);
+            }
+            else
+                isMoving = false;
+        }
+    }
+
+    void Update()
+    {
+        if (BindableInput.BindDown("Force Stop"))
+        {
+            isMoving = false;
+            forceStop = true;
+        }
+        if (BindableInput.BindUp("Force Stop"))
+        {
+            forceStop = false;
+        }
+
+        if (!eventSystem.IsPointerOverGameObject())
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                RaycastHit hit;
+                Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, int.MaxValue, enemyMask))
                 {
-                    RaycastHit hit;
-                    Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-                    if (!eventSystem.IsPointerOverGameObject())
-                    {
-                        if (!BindableInput.BindDown("Force Move", true) && Physics.Raycast(ray, out hit, int.MaxValue, enemyMask))
-                        {
-                            inCombatMove = true;
-                            targettedEnemy = hit.collider.gameObject;
-                            timeClickedOnEnemy = Time.time;
-                            Vector3 look = hit.point;
-                            look.y = transform.position.y;
-                            transform.rotation = Quaternion.LookRotation(look - transform.position);
-                        }
-                        else
-                        {
-                            if (Physics.Raycast(ray, out hit, int.MaxValue, environmentMask))
-                            {
-                                ParticleSystem newClickEffect = Instantiate(clickEffect);
-                                newClickEffect.transform.position = hit.point;
-                                Destroy(newClickEffect.gameObject, newClickEffect.main.duration * 5);
-                                inCombatMove = false;
-                                targettedEnemy = null;
-                                timeClickedOnEnemy = 0;
-                            }
-                        }
-                    }
+                    inCombatMove = true;
+                    targettedEnemy = hit.collider.gameObject;
+                    timeClickedOnEnemy = Time.time;
+                    Vector3 look = hit.point;
+                    look.y = transform.position.y;
+                    transform.rotation = Quaternion.LookRotation(look - transform.position);
                 }
-                else if (Input.GetButton("Mouse PlayerMove") && !inCombatMove)
+                else if (Physics.Raycast(ray, out hit, int.MaxValue, environmentMask))
                 {
-                    RaycastHit hit;
-                    Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-                    if (!eventSystem.IsPointerOverGameObject())
-                    {
-                        if (Physics.Raycast(ray, out hit, int.MaxValue, environmentMask))
-                        {
-                            if (canMove && !BindableInput.BindDown("Force Stop", true))
-                            {
-                                Vector3 nextMove = hit.point;
-                                nextMove.y += halfHeight;
-                                MovePlayer(nextMove);
-                            }
-                            else
-                                StopMoving();
-                            Vector3 look = hit.point;
-                            look.y = transform.position.y;
-                            transform.rotation = Quaternion.LookRotation(look - transform.position);
-                        }
-                    }
+                    isMoving = true;
+                    inCombatMove = false;
+                    targettedEnemy = null;
+                    timeClickedOnEnemy = 0;
+                    ParticleSystem newClickEffect = Instantiate(clickEffect);
+                    newClickEffect.transform.position = hit.point;
+                    Destroy(newClickEffect.gameObject, newClickEffect.main.duration * 5);
+                }
+            }
+
+            if (!inCombatMove && Input.GetKey(KeyCode.Mouse0))
+            {
+                RaycastHit hit;
+                Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, int.MaxValue, environmentMask))
+                {
+                    Vector3 nextMove = hit.point;
+                    nextMove.y += halfHeight;
+                    moveToPosition = nextMove;
+                    Vector3 look = moveToPosition;
+                    look.y = transform.position.y;
+                    transform.rotation = Quaternion.LookRotation(look - transform.position);
                 }
             }
         }
-	}
+    }
 }

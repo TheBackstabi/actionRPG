@@ -39,7 +39,7 @@ public class PlayerCombatController : MonoBehaviour {
 
     private void CastSpell(PlayerSpells.SpellSlots slot)
     {
-        playerController.StopMoving();
+        playerController.isMoving = false;
         Spell castedSpell = playerController.spells.GetSelectedSpell(slot);
         if (playerStats.CurrentResource >= castedSpell.manaCost)
         {
